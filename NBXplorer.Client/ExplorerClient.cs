@@ -410,7 +410,7 @@ namespace NBXplorer
 			return SendAsync<BroadcastResult>(HttpMethod.Post, tx.ToBytes(), "v1/cryptos/{0}/transactions", new[] { CryptoCode }, cancellation);
 		}
 
-		private static readonly HttpClient SharedClient = new HttpClient();
+		private static readonly HttpClient SharedClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(10 * 60) };
 		internal HttpClient Client = SharedClient;
 
 		public void SetClient(HttpClient client)
